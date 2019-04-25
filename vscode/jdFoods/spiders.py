@@ -14,10 +14,10 @@ def search():
 	browser.get('https://www.jd.com/')
 	try:
 		input = wait.until(
-			EC.presence_of_all_elements_located((By.CSS_SELECTOR,"#key"))
+			EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#key"))
 		)  #llist
 		submit = wait.until(
-			EC.element_to_be_clickable((By.CSS_SELECTOR,"#search > div > div.form > button"))
+			EC.element_to_be_clickable((By.CSS_SELECTOR, "#search > div > div.form > button"))
 		)
 		# input = browser.find_element_by_id('key')
 		input[0].send_keys('美食')
@@ -25,7 +25,7 @@ def search():
 
 		total = wait.until(
 			EC.presence_of_all_elements_located(
-				(By.CSS_SELECTOR,'#J_bottomPage > span.p-skip > em:nth-child(1) > b')
+				(By.CSS_SELECTOR, '#J_bottomPage > span.p-skip > em:nth-child(1) > b')
 			)
 		)
 		html = browser.page_source
@@ -43,15 +43,15 @@ def nextPage(pageNumber):
 			sleep(1)
         # 翻页动作
 		button = wait.until(
-			EC.element_to_be_clickable((By.CSS_SELECTOR,'#J_bottomPage > span.p-num > a.pn-next > em'))
+			EC.element_to_be_clickable((By.CSS_SELECTOR, '#J_bottomPage > span.p-num > a.pn-next > em'))
 		)
 		button.click()
 		wait.until(
-			EC.presence_of_all_elements_located((By.CSS_SELECTOR,"#J_goodsList > ul > li:nth-child(60)"))
+			EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#J_goodsList > ul > li:nth-child(60)"))
 		)
 	    # 判断翻页成功
 		wait.until(
-			EC.text_to_be_present_in_element((By.CSS_SELECTOR,"#J_bottomPage > span.p-num > a.curr"), str(pageNumber))
+			EC.text_to_be_present_in_element((By.CSS_SELECTOR, "#J_bottomPage > span.p-num > a.curr"), str(pageNumber))
 		)
 		html = browser.page_source
 		praseHtml(html)
