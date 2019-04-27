@@ -92,3 +92,26 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 # HTTPERROR_ALLOWED_CODES = [301]
+
+
+# scrapy-redis相关配置
+# 确保request存储到redis
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+
+# 设置redis为pipeline
+# ITEM_PIPELINES = {
+#    'scrapy_redis.pipelines.RedisPipeline': 300
+# }
+
+# 在redis中的队列，设置每次不会清空
+SCHEDULER_PERSIST = True
+
+# 设置redis连接信息
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379
+
+# 注：
+# 1. 启动redis服务器
+# 2. 在爬虫服务器运行scrapy-redis爬虫需要使用命令：scrapy runspider [爬虫名字]
+# 3. 运行起来后启动一个redis-cli客户端，在客户端输入一个启动url，例如：lpush fang:start_urls https://www.fang.com/SoufunFamily.htm
+# 4. 命令中间被push的是你在spider里面写的redis_key，后面是一个开始的链接
