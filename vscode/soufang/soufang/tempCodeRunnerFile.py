@@ -1,0 +1,1 @@
+execute("scrapy crawl soufangSpider".split())
