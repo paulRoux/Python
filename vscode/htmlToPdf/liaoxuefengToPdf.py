@@ -106,7 +106,7 @@ class LiaoxuefengToPdf(Crawler):
                 url = "".join([self.domain, link])
             print(url)
             yield url
-            # break
+            break
 
 
     def parseBody(self, response):

@@ -34,9 +34,10 @@ def getUrlList():
     urls = []
     global fileName
     response = requests.get(startUrl, headers=headers)
-    html = etree.HTML(response.text)
+    # 网站编码进行了压缩，需要解压缩否则出现中文乱码
+    html = etree.HTML(response.content.decode("utf-8"))
     dirs = html.xpath("//div[@class='design']//a")
-    fileName = html.xpath("string(//div[@id='content']/h1/text())")
+    fileName = html.xpath("string(//div[@class='design']/a[1]/@title)")
     for dir in dirs[1:]:
         link = dir.xpath("string(./@href)")
         if not link.startswith("https"):
@@ -93,7 +94,6 @@ def main():
     urls = getUrlList()
     htmls = [parseHtml(url, str(index) + ".html") for index, url in enumerate(urls)]
     savePdf(htmls, fileName)
-
     for html in htmls:
         os.remove(html)
 
