@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+这是模板 <br>
+
+{{ url }} <br>
+
+{{ list }} <br>
+{{ list.2 }} <br>
+{{ list[2] }} <br>
+
+{{ dict }} <br>
+{{ dict.url }} <br>
+{{ dict['url'] }} <br>
+
+<hr>
+
+{% for li in list %}
+    {% if li > 3 %}
+        {{ li }} <br>
+    {% endif %}
+{% endfor %}
+
+
+
+
+</body>
+</html>
