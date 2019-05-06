@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+    <form method="post">
+        {{ form.csrf_token }}
+
+        {{ form.authorName.label }}{{ form.authorName }}<br>
+        {% for msg in form.authorName.errors %}
+            {{ msg }}
+        {% endfor %}
+        {{ form.bookName.label }}{{ form.bookName }}<br>
+        {% for msg in form.bookName.errors %}
+            {{ msg }}
+        {% endfor %}
+        {{ form.submit }}
+    </form>
+
+    <hr>
+
+    <ul>
+        {% for author in authors %}
+            <li>作者: {{ author.name }}</li>
+                <ul>
+                    {% for book in author.books %}
+                        <li>书籍: {{ book.name }}
+                            <a href="javascript:" book-id="{{ book.id }}">删除</a></li>
+                    {% endfor %}
+                </ul>
+        {% endfor %}
+    </ul>
+    <script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
+    <script>
+        $("a").click(
+            function () {
+                let data = {
+                    book_id: $(this).attr("book-id")
+                };
+                let req_json = JSON.stringify(data);
+                $.ajax({
+                    url: "/delete/book",  // 请求的后端url
+                    type: "post",  // 请求方式
+                    data: req_json,  // 向后端发送的请求数据
+                    contentType: "application/json",  //指明向后端发送的数据格式
+                    dataType: "json",  // 指明后端返回的数据格式
+                    success: function(resp) {
+                        if (resp.code === 0) {
+                            location.href = "/";
+                        }
+                    }
+                })
+            }
+        )
+    </script>
+</body>
+</html>
