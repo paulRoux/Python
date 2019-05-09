@@ -1,6 +1,7 @@
 # pycharm
 .idea
 venv
+pycharm/movie/
 
 # vscode
 .env
