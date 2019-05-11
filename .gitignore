@@ -2,6 +2,7 @@
 .idea
 venv
 pycharm/movie/
+pycharm/order/
 
 # vscode
 .env
