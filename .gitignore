@@ -10,3 +10,6 @@ pycharm/order/
 
 # code
 __pycache__
+
+# others
+/others
